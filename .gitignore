@@ -1,1 +1,5 @@
 *.xml
+
+*dynamic_.1.dll
+
+*dynamic_.1.pdb
