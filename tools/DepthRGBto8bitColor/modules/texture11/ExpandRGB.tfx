@@ -1,0 +1,70 @@
+//@author: id144
+//@help: Set zero if some of the surrounding pixels is zero
+//@tags: texture
+//@credits: 
+
+Texture2D tex0 : PREVIOUS;
+float2 R:TARGETSIZE;
+
+SamplerState pointSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_POINT;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+struct psInput
+{
+	float4 p : SV_Position;
+	float2 uv : TEXCOORD0;
+};
+
+float pixCountThreshold = 5;
+float3 g_kernel[9]:IMMUTABLE =
+{
+    float3( -0.71, -0.71, 0.5454),
+    float3(  0, -1 , 0.9717	),	
+    float3(  0.71, -0.71,0.5454),
+	float3( -1, 0 , 0.9717),
+    float3(  1, 0 , 0.9717),
+	float3( -0.71, 0.71, 0.5454),
+    float3(  0, 1,   0.9717 ),
+    float3(  0.71, 0.71, 0.5454),		
+    float3(  0, 0, 1 ),			
+};
+
+
+float4 PS(psInput input) : SV_Target
+{
+	float4 cSum = 0;		
+	float2 off=1/R;
+	float2 x = input.uv;
+	float4 cTmp =0;
+	float divSum = 0;
+    for(int i=0; i<8; i++)
+    {    	
+    	cTmp = tex0.SampleLevel(pointSampler,x+g_kernel[i].xy*off,0);    	
+    	if (cTmp.a>0.99) 
+    	{
+    				cSum.rgb +=(cTmp.rgb)*g_kernel[i].z;
+    				divSum += g_kernel[i].z;    				
+    	};
+    }
+				
+	cTmp = tex0.SampleLevel(pointSampler,x,0);    	
+	if (cTmp.a<0.99) {
+			cTmp.rgb = cSum.rgb/divSum;
+	}
+		
+	return cTmp;
+}
+
+technique10 Process
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS()));
+	}
+}
+
+
+

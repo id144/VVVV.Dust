@@ -1,0 +1,59 @@
+Texture2D inputTexture <string uiname="Displacement Texture";>;
+SamplerState pointSampler <string uiname="Sampler State";>
+{
+    Filter = MIN_MAG_MIP_POINT;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+struct vertextStruct
+{
+	float3 pos : POSITION;
+	float3 normal : NORMAL;	
+	float2 uv : TEXCOORD0;
+};
+
+vertextStruct VS(vertextStruct input)
+{
+	vertextStruct o;
+
+	o.pos =  inputTexture.SampleLevel(pointSampler,input.uv.xy,0).rgb;
+	o.normal = input.normal;
+	o.uv = input.uv;
+    return o;
+}
+
+[maxvertexcount(3)]
+void GS(triangle vertextStruct input[3], inout TriangleStream<vertextStruct> gsout)
+{ 
+	vertextStruct o = (vertextStruct)0;
+	 
+	if ((input[0].pos.z >0.2)&&(input[1].pos.z >0.2)&& (input[2].pos.z >0.2)) {
+		o.pos = input[0].pos;
+		o.uv = input[0].uv;
+		o.normal = input[0].normal;
+		gsout.Append(o);
+		
+		o.pos = input[1].pos;
+		o.uv = input[1].uv;
+		o.normal = input[1].normal;
+		gsout.Append(o);
+		
+		o.pos = input[2].pos;
+		o.uv = input[2].uv;
+		o.normal = input[2].normal;
+		gsout.Append(o);
+	
+		gsout.RestartStrip();		
+	}
+}
+
+GeometryShader gsStreamOut = ConstructGSWithSO( CompileShader( gs_4_0, GS() ), "POSITION.xyz;NORMAL.xyz;TEXCOORD.xy",NULL,NULL,NULL,-1 );
+technique11 PassMesh
+{
+    pass PP2
+    {
+        SetVertexShader( CompileShader( vs_4_0, VS() ) );
+        SetGeometryShader( gsStreamOut );
+    }  
+}
+

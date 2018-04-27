@@ -1,0 +1,26 @@
+//Reconstructs Camera space position from depth and ray lookup table
+
+Texture2D NormalizedDepthTexture : register(t0);
+
+Texture2D<float2> RayTexture : register(t1);
+
+float4 PS_Normalized(float4 p : SV_Position, float2 uv : TEXCOORD0) : SV_Target
+{
+	float d = NormalizedDepthTexture.Load(p.xyz).r;	
+	d *= 65.535f; //Multiply by MAX_USHORT-1
+	float2 ray = RayTexture.Load(p.xyz).rg;
+	return float4(ray.xy*d,d,1.0f);
+}
+
+
+
+
+technique11 ProcessRaw
+{
+	pass P0 <string format="R16G16B16A16_float";>
+	{
+
+		SetPixelShader( CompileShader( ps_5_0, PS_Normalized() ) );
+	}
+}
+

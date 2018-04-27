@@ -1,0 +1,119 @@
+Texture2D NormalizedDepthTexture <string uiname="Depth Texture";>;
+Texture2D<float2> RayTexture <string uiname="Raytable Texture";>;
+Texture2D inputTexture <string uiname="Displacement Texture";>;
+cbuffer cbPerObj : register( b1 )
+{
+	float4x4 tW: WORLD;        
+	float4x4 tV: VIEW;         
+	float4x4 tWV: WORLDVIEW;
+	float4x4 tWIT: WORLDINVERSETRANSPOSE;
+	float4x4 tP: PROJECTION;
+	float extrusionFactor;
+};
+
+SamplerState pointSampler <string uiname="Sampler State";>
+{
+    Filter = MIN_MAG_MIP_POINT;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+struct vertextStruct
+{
+	float3 pos : POSITION;
+	float3 normal : NORMAL;	
+	float2 uv : TEXCOORD0;
+};
+
+vertextStruct VS(vertextStruct input)
+{
+	vertextStruct o;
+	
+	float d = NormalizedDepthTexture.SampleLevel(pointSampler,float2(input.uv.xy),0).r;	
+	if (d <0.0001) 
+	{
+		o.pos =  0;
+		o.normal = 0;
+		o.uv = 0;
+
+	}
+	else
+	{
+		d *= 65.535f; //Multiply by MAX_USHORT-1	
+		float2 ray = RayTexture.SampleLevel(pointSampler,float2(input.uv.xy),0).rg;
+		o.pos =  float3(d*ray,d);	
+		o.normal = input.normal;
+		o.uv = input.uv;
+		
+	}
+    return o;
+}
+
+[maxvertexcount(3)]
+void GS_Norm(triangle vertextStruct input[3], inout TriangleStream<vertextStruct> gsout)
+{ 
+	
+	vertextStruct elem = (vertextStruct)0;
+	if ((input[0].pos.z >0.2)&&(input[1].pos.z >0.2)&& (input[2].pos.z >0.2)) 
+	{		
+
+
+		float3 p1 = input[0].pos;
+		float3 p2 = input[1].pos;
+		float3 p3 = input[2].pos;
+		
+		
+		float3 faceEdgeA = p2 - p1;
+	    float3 faceEdgeB = p1 - p3;
+	    float3 norm = cross(faceEdgeB, faceEdgeA);	
+		norm = normalize(mul(mul(norm, (float3x3)tWIT),(float3x3)tV).xyz)*3;
+		float3 extrusion = norm*(1 - inputTexture.SampleLevel(pointSampler,input[0].uv.xy,0).xyz)*extrusionFactor;			
+		
+		elem.pos = input[0].pos+extrusion;
+		elem.uv = input[0].uv;
+		elem.normal = norm;
+		gsout.Append(elem);
+		
+		elem.pos = input[1].pos+extrusion;;
+		elem.uv = input[1].uv;
+		elem.normal = norm;
+		gsout.Append(elem);
+		
+		elem.pos = input[2].pos+extrusion;;
+		elem.uv = input[2].uv;
+		elem.normal = norm;
+		gsout.Append(elem);
+	
+		gsout.RestartStrip();
+	}
+}
+
+
+[maxvertexcount(3)]
+void GS(triangle vertextStruct input[3], inout TriangleStream<vertextStruct> gsout)
+{ 
+	vertextStruct o = (vertextStruct)0;
+	float extrusion = 1 - inputTexture.SampleLevel(pointSampler,input[0].uv.xy,0).r;
+	for (int i; i < 3; i++) 
+	{
+		o.uv = input[i].uv;
+		o.normal = input[i].normal;
+		o.pos = input[i].pos;
+		gsout.Append(o);
+	}          
+	gsout.RestartStrip();		
+	
+	
+}
+
+GeometryShader gsStreamOut = ConstructGSWithSO( CompileShader( gs_4_0, GS_Norm() ), "POSITION.xyz;NORMAL.xyz;TEXCOORD.xy",NULL,NULL,NULL,-1 );
+technique11 PassMesh
+{
+    pass PP2
+    {
+        SetVertexShader( CompileShader( vs_4_0, VS() ) );
+   	
+        SetGeometryShader( gsStreamOut );
+    }  
+}
+

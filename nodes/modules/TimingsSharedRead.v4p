@@ -1,0 +1,461 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta35.dtd" >
+   <PATCH nodename="D:\OneDrive\VVVV.Packs.Dust\nodes\modules\TimingsSharedRead.v4p" scrollx="2745" scrolly="0" systemname="TimingsSharedRead" filename="D:\OneDrive\VVVV.Packs.Dust\nodes\modules\TimingsSharedRead.v4p">
+   <BOUNDS type="Window" left="2025" top="3840" width="25800" height="9765">
+   </BOUNDS>
+   <PACK Name="Image" Version="0.2.0">
+   </PACK>
+   <PACK Name="addonpack" Version="35.0.0">
+   </PACK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="21">
+   <BOUNDS type="Box" left="525" top="465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="525" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="FPS">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="22">
+   <BOUNDS type="Box" left="2880" top="465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="2880" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="WindowsTime">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="23">
+   <BOUNDS type="Box" left="5520" top="465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="5520" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="UpdateViewTime">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="24">
+   <BOUNDS type="Box" left="10245" top="465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="10245" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="RenderTime">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="25">
+   <BOUNDS type="Box" left="7950" top="465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7950" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="PrepareGraphTime">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="26">
+   <BOUNDS type="Box" left="12570" top="465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="12570" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="PresentTime">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="27">
+   <BOUNDS type="Box" left="18375" top="465" width="1635" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="18375" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="ResetCacheTime">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="29">
+   <BOUNDS type="Box" left="15105" top="465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="15105" top="465" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="DebugOutputTime">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="#vvvv">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="9">
+   <BOUNDS type="Node" left="525" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="30">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="FPS">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="525" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="21" srcpinname="Output String" dstnodeid="9" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="2">
+   <BOUNDS type="Node" left="2895" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="0.00104673758687568">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="WindowsTime">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="2895" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="22" srcpinname="Output String" dstnodeid="2" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="11">
+   <BOUNDS type="Node" left="5520" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="0.00635042945214082">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="UpdateViewTime">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="5520" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="23" srcpinname="Output String" dstnodeid="11" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="18">
+   <BOUNDS type="Node" left="10245" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="0.000105772360257106">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="RenderTime">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="10245" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="24" srcpinname="Output String" dstnodeid="18" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="12">
+   <BOUNDS type="Node" left="7950" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="0.00425439938771888">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="PrepareGraphTime">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="7950" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="25" srcpinname="Output String" dstnodeid="12" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="19">
+   <BOUNDS type="Node" left="12570" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="0.000195959906704957">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="PresentTime">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="12570" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="26" srcpinname="Output String" dstnodeid="19" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="20">
+   <BOUNDS type="Node" left="15105" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="2.55487975664437E-007">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="DebugOutputTime">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="15105" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="29" srcpinname="Output String" dstnodeid="20" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE systemname="SharedMemoryReadDouble" filename="SharedMemoryReadDouble.v4p" nodename="SharedMemoryReadDouble.v4p" componentmode="Hidden" id="16">
+   <BOUNDS type="Node" left="18375" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="0.0107926131022396">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" visible="1" values="ResetCacheTime">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="18375" top="1470">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="27" srcpinname="Output String" dstnodeid="16" dstpinname="Shared Memory Name">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="31">
+   <BOUNDS type="Box" left="525" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="525" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="FPS">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="9" srcpinname="Output" dstnodeid="31" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="32">
+   <BOUNDS type="Box" left="2880" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="2880" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="WindowsTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="Output" dstnodeid="32" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="33">
+   <BOUNDS type="Box" left="5520" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="5520" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="UpdateViewTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="11" srcpinname="Output" dstnodeid="33" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="34">
+   <BOUNDS type="Box" left="7935" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7935" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="PrepareGraphTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="12" srcpinname="Output" dstnodeid="34" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="35">
+   <BOUNDS type="Box" left="10245" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="10245" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="RenderTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="18" srcpinname="Output" dstnodeid="35" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="36">
+   <BOUNDS type="Box" left="12570" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="12570" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="PresentTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="19" srcpinname="Output" dstnodeid="36" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="37">
+   <BOUNDS type="Box" left="15105" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="15105" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="DebugOutputTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="20" srcpinname="Output" dstnodeid="37" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="38">
+   <BOUNDS type="Box" left="18375" top="2205" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="18375" top="2205" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="ResetCacheTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="16" srcpinname="Output" dstnodeid="38" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="Cons (Spreads)" filename="%VVVV%\lib\nodes\plugins\VVVV.Nodes.dll" nodename="Cons (Spreads)" componentmode="Hidden" id="39">
+   <BOUNDS type="Node" left="23865" top="5295" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input Count" slicecount="1" values="7">
+   </PIN>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Input 2" visible="1">
+   </PIN>
+   <PIN pinname="Input 3" visible="1">
+   </PIN>
+   <PIN pinname="Input 4" visible="1">
+   </PIN>
+   <PIN pinname="Input 5" visible="1">
+   </PIN>
+   <PIN pinname="Input 6" visible="1">
+   </PIN>
+   <PIN pinname="Input 7" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="Output" dstnodeid="39" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="11" srcpinname="Output" dstnodeid="39" dstpinname="Input 2">
+   </LINK>
+   <LINK srcnodeid="12" srcpinname="Output" dstnodeid="39" dstpinname="Input 3">
+   </LINK>
+   <LINK srcnodeid="18" srcpinname="Output" dstnodeid="39" dstpinname="Input 4">
+   </LINK>
+   <LINK srcnodeid="19" srcpinname="Output" dstnodeid="39" dstpinname="Input 5">
+   </LINK>
+   <LINK srcnodeid="20" srcpinname="Output" dstnodeid="39" dstpinname="Input 6">
+   </LINK>
+   <LINK srcnodeid="16" srcpinname="Output" dstnodeid="39" dstpinname="Input 7">
+   </LINK>
+   <NODE systemname="Bounds (Spectral)" nodename="Bounds (Spectral)" componentmode="Hidden" id="40">
+   <BOUNDS type="Node" left="24345" top="6075" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Minimum" visible="1">
+   </PIN>
+   <PIN pinname="Maximum" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="39" srcpinname="Output" dstnodeid="40" dstpinname="Input">
+   </LINK>
+   <NODE systemname="Map (Value)" nodename="Map (Value)" componentmode="Hidden" id="41">
+   <BOUNDS type="Node" left="23880" top="6705" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Source Minimum" visible="1">
+   </PIN>
+   <PIN pinname="Source Maximum" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Mapping" slicecount="1" values="Clamp">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="39" srcpinname="Output" dstnodeid="41" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="40" srcpinname="Minimum" dstnodeid="41" dstpinname="Source Minimum">
+   </LINK>
+   <LINK srcnodeid="40" srcpinname="Maximum" dstnodeid="41" dstpinname="Source Maximum">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="42">
+   <BOUNDS type="Box" left="23895" top="7260" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="23895" top="7260" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Output">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="41" srcpinname="Output" dstnodeid="42" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="43">
+   <BOUNDS type="Node" left="19725" top="5565" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="19725" top="5565" width="1800" height="1800">
+   </BOUNDS>
+   <PIN pinname="Rows" slicecount="1" values="7">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="GraphNames">
+   </PIN>
+   <PIN pinname="Show SliceIndex" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Input String" slicecount="7" values="WindowsTime,UpdateViewTime,PrepareGraphTime,RenderTime,PresentTime,DebugOutputTime,ResetCacheTime">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="44">
+   <BOUNDS type="Box" left="26280" top="7320" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="26280" top="7320" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Output Absolute|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="39" srcpinname="Output" dstnodeid="44" dstpinname="Y Input Value">
+   </LINK>
+   </PATCH>

@@ -1,0 +1,31 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta35.dtd" >
+   <PATCH nodename="D:\OneDrive\VVVV.Packs.Dust\nodes\HDFace.v4p" scrollx="0" scrolly="-360" systemname="HDFace" filename="D:\OneDrive\VVVV.Packs.Dust\nodes\HDFace.v4p">
+   <BOUNDS type="Window" left="8595" top="5430" width="9000" height="6000">
+   </BOUNDS>
+   <NODE systemname="HDFaceBuffer (Kinect2 Microsoft)" filename="%VVVV%\packs\dx11\nodes\plugins\kinect2\VVVV.DX11.Nodes.Kinect2.dll" nodename="HDFaceBuffer (Kinect2 Microsoft)" componentmode="Hidden" id="0">
+   <BOUNDS type="Node" left="1935" top="975" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="1" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="4965" top="1260" width="510" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="4965" top="1260" width="510" height="270">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="temp">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   </NODE>
+   <PACK Name="Image" Version="0.2.0">
+   </PACK>
+   <PACK Name="addonpack" Version="35.0.0">
+   </PACK>
+   <NODE systemname="HDFace (Kinect2 Microsoft)" filename="plugins\MicrosoftKinect2HDFace\MicrosoftKinect2HDFace.csproj" nodename="HDFace (Kinect2 Microsoft)" componentmode="Hidden" id="4">
+   <BOUNDS type="Node" left="4185" top="825" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   </PATCH>

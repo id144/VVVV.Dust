@@ -1,0 +1,71 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta35.dtd" >
+   <PATCH nodename="D:\OneDrive\VVVV.Packs.Dust\tools\DepthRGBto8bitColor\modules\FFMpegShellExecute.v4p" scrollx="0" scrolly="3240" systemname="FFMpegShellExecute" filename="D:\Dropbox\VVVV_RambertLondon\VVVV\ColorRampSplit\modules\FFMpegShellExecute.v4p">
+   <BOUNDS type="Window" left="630" top="7665" width="20505" height="6000">
+   </BOUNDS>
+   <PACK Name="Image" Version="0.2.0">
+   </PACK>
+   <PACK Name="addonpack" Version="35.0.0">
+   </PACK>
+   <NODE systemname="ShellExecute (Windows)" nodename="ShellExecute (Windows)" componentmode="Hidden" id="2">
+   <BOUNDS type="Node" left="1110" top="4665" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="File" visible="1">
+   </PIN>
+   <PIN pinname="Do Execute" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="3">
+   <BOUNDS type="Box" left="1125" top="4290" width="1350" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="1125" top="4290" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="1" values="ffmpeg">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="cmd.exe">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="|Windows Executable (*.exe, *.com, *.bat)||*.exe;*.com;*.bat|">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="Filename">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="3" srcpinname="Output String" dstnodeid="2" dstpinname="File">
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="8">
+   <BOUNDS type="Node" left="1005" top="5325" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1005" top="5325" width="18435" height="405">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" values="|ffmpeg  -r 30 -start_number 1 -i C:\Users\dust\Desktop\record_for_webgl\%08dsonja_XS.png -vcodec libx264 -crf 25  -pix_fmt yuv420p E:\TARDIS3.mp4|">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="10">
+   <BOUNDS type="Box" left="2100" top="3540" width="480" height="480">
+   </BOUNDS>
+   <BOUNDS type="Node" left="2100" top="3540" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Bang">
+   </PIN>
+   <PIN pinname="X Input Value" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="10" srcpinname="Y Output Value" dstnodeid="2" dstpinname="Do Execute">
+   </LINK>
+   <NODE id="9" systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox">
+   <BOUNDS type="Box" width="18435" height="405" left="975" top="6585">
+   </BOUNDS>
+   <BOUNDS type="Node" left="975" top="6585" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" values="|ffmpeg  -r 30 -start_number 1 -i C:\Users\dust\Desktop\record_for_webgl\%08dsonja_XS.png  -codec:v libtheora -qscale:v 5 -codec:a libvorbis -qscale:a 5 E:\TARDIS3.ogv|">
+   </PIN>
+   </NODE>
+   </PATCH>

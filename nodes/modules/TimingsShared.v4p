@@ -1,0 +1,139 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta35.dtd" >
+   <PATCH nodename="D:\OneDrive\VVVV.Packs.Dust\nodes\modules\TimingsShared.v4p" scrollx="0" scrolly="-360" systemname="TimingsShared" filename="D:\OneDrive\VVVV.Packs.Dust\nodes\modules\TimingsShared.v4p">
+   <NODE systemname="Timing (Debug)" nodename="Timing (Debug)" componentmode="Hidden" id="0" hiddenwhenlocked="1">
+   <BOUNDS type="Node" left="1185" top="480" width="17460" height="270">
+   </BOUNDS>
+   <PIN pinname="frames per second" visible="1">
+   </PIN>
+   <PIN pinname="Windows Time" visible="1">
+   </PIN>
+   <PIN pinname="Debug Output Time" visible="1">
+   </PIN>
+   <PIN pinname="Network Sync Time" visible="1">
+   </PIN>
+   <PIN pinname="Present Time" visible="1">
+   </PIN>
+   <PIN pinname="Render Time" visible="1">
+   </PIN>
+   <PIN pinname="Prepare Graph Time" visible="1">
+   </PIN>
+   <PIN pinname="Update View Time" visible="1">
+   </PIN>
+   <PIN pinname="Timer Time" visible="1">
+   </PIN>
+   <PIN pinname="Reset Cache Time" visible="1">
+   </PIN>
+   </NODE>
+   <BOUNDS type="Window" left="3300" top="4815" width="20730" height="9315">
+   </BOUNDS>
+   <PACK Name="Image" Version="0.2.0">
+   </PACK>
+   <PACK Name="addonpack" Version="35.0.0">
+   </PACK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="2">
+   <BOUNDS type="Node" left="2640" top="1770" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="WindowsTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Windows Time" dstnodeid="2" dstpinname="Input">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="3">
+   <BOUNDS type="Box" left="12810" top="3915" width="1320" height="270">
+   </BOUNDS>
+   <BOUNDS type="Node" left="12810" top="3915" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="s">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Debug Output Time" dstnodeid="3" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="9">
+   <BOUNDS type="Node" left="1200" top="1260" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="123459.84">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="FPS">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="frames per second" dstnodeid="9" dstpinname="Input">
+   </LINK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="11">
+   <BOUNDS type="Node" left="5535" top="3405" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="123459.84">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="UpdateViewTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Update View Time" dstnodeid="11" dstpinname="Input">
+   </LINK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="12">
+   <BOUNDS type="Node" left="7005" top="4185" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="123459.84">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="PrepareGraphTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Prepare Graph Time" dstnodeid="12" dstpinname="Input">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="15">
+   <BOUNDS type="Box" left="11115" top="2145" width="1575" height="465">
+   </BOUNDS>
+   <BOUNDS type="Node" left="11115" top="2145" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="s">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Reset Cache Time" dstnodeid="15" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="16">
+   <BOUNDS type="Node" left="14235" top="3210" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="123459.84">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="ResetCacheTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Reset Cache Time" dstnodeid="16" dstpinname="Input">
+   </LINK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="18">
+   <BOUNDS type="Node" left="8415" top="3405" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="123459.84">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="RenderTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Render Time" dstnodeid="18" dstpinname="Input">
+   </LINK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="19">
+   <BOUNDS type="Node" left="9870" top="4170" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="123459.84">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="PresentTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Present Time" dstnodeid="19" dstpinname="Input">
+   </LINK>
+   <NODE systemname="SharedMemoryWriteDouble" filename="SharedMemoryWriteDouble.v4p" nodename="SharedMemoryWriteDouble.v4p" componentmode="Hidden" id="20">
+   <BOUNDS type="Node" left="11190" top="3000" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="123459.84">
+   </PIN>
+   <PIN pinname="Shared Memory Name" slicecount="1" values="DebugOutputTime">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Debug Output Time" dstnodeid="20" dstpinname="Input">
+   </LINK>
+   <PACK Name="image" Version="0.2.0">
+   </PACK>
+   </PATCH>

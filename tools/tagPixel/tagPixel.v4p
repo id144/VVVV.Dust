@@ -1,0 +1,165 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta35.dtd" >
+   <PATCH nodename="D:\OneDrive\VVVV.Packs.Dust\tools\tagPixel\tagPixel.v4p" scrollx="0" scrolly="-360" systemname="tagPixel" filename="D:\OneDrive\VVVV.Packs.Dust\tools\tagPixel\tagPixel.v4p">
+   <BOUNDS type="Window" left="13710" top="840" width="10890" height="13740">
+   </BOUNDS>
+   <NODE systemname="Preview (DX11.Texture)" filename="%VVVV%\packs\dx11\nodes\plugins\VVVV.DX11.Nodes.dll" nodename="Preview (DX11.Texture)" componentmode="InAWindow" id="12">
+   <BOUNDS type="Node" left="1260" top="7830" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1260" top="7830" width="6000" height="4500">
+   </BOUNDS>
+   <BOUNDS type="Window" left="42255" top="2490" width="11850" height="10125">
+   </BOUNDS>
+   <PIN pinname="Texture In" visible="1">
+   </PIN>
+   </NODE>
+   <PACK Name="image" Version="0.2.0">
+   </PACK>
+   <PACK Name="addonpack" Version="35.0.0">
+   </PACK>
+   <NODE systemname="Kinect2 (Devices Microsoft)" filename="%VVVV%\packs\dx11\nodes\plugins\kinect2\VVVV.DX11.Nodes.Kinect2.dll" nodename="Kinect2 (Devices Microsoft)" componentmode="Hidden" id="16">
+   <BOUNDS type="Node" left="1275" top="675" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Kinect Runtime" visible="1">
+   </PIN>
+   <PIN pinname="Enabled" slicecount="1" values="1">
+   </PIN>
+   <BOUNDS type="Box" left="1275" top="675">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="World (Kinect2 Microsoft)" filename="%VVVV%\packs\dx11\nodes\plugins\kinect2\VVVV.DX11.Nodes.Kinect2.dll" nodename="World (Kinect2 Microsoft)" componentmode="Hidden" id="17">
+   <BOUNDS type="Node" left="1275" top="1275" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Kinect Runtime" visible="1">
+   </PIN>
+   <PIN pinname="Texture" visible="1">
+   </PIN>
+   <PIN pinname="Frame Index" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="1275" top="1275">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="16" srcpinname="Kinect Runtime" dstnodeid="17" dstpinname="Kinect Runtime">
+   </LINK>
+   <PACK Name="Image" Version="0.2.0">
+   </PACK>
+   <NODE systemname="MaskDepth (DX11.TextureFX)" filename="texture11\MaskDepth.tfx" nodename="MaskDepth (DX11.TextureFX)" componentmode="Hidden" id="25">
+   <BOUNDS type="Node" left="2355" top="5535" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="texture2dStaticDepth" visible="1">
+   </PIN>
+   <PIN pinname="Texture In" visible="1">
+   </PIN>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="Enabled" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="17" srcpinname="Texture" dstnodeid="25" dstpinname="Texture In">
+   </LINK>
+   <NODE systemname="pixelClassificationBuffer" filename="modules\pixelClassificationBuffer.v4p" nodename="modules\pixelClassificationBuffer.v4p" componentmode="Hidden" id="33">
+   <BOUNDS type="Node" left="2715" top="2970" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2715" top="2970" width="7260" height="9180">
+   </BOUNDS>
+   <BOUNDS type="Window" left="16425" top="4845" width="7260" height="9180">
+   </BOUNDS>
+   <PIN pinname="Buffers" visible="1">
+   </PIN>
+   <PIN pinname="reset" visible="1">
+   </PIN>
+   <PIN pinname="integrate" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="17" srcpinname="Texture" dstnodeid="33" dstpinname="Texture">
+   </LINK>
+   <NODE systemname="textureFromBuffer" filename="modules\textureFromBuffer.v4p" nodename="modules\textureFromBuffer.v4p" componentmode="Hidden" id="35">
+   <BOUNDS type="Node" left="2715" top="4440" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2715" top="4440" width="6855" height="6840">
+   </BOUNDS>
+   <BOUNDS type="Window" left="18060" top="5760" width="6855" height="6840">
+   </BOUNDS>
+   <PIN pinname="Buffers" visible="1">
+   </PIN>
+   <PIN pinname="Technique" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="33" srcpinname="Resolution" dstnodeid="35" dstpinname="Texture SizeXY">
+   </LINK>
+   <LINK srcnodeid="33" srcpinname="Buffers" dstnodeid="35" dstpinname="Buffers">
+   </LINK>
+   <LINK srcnodeid="35" srcpinname="Buffers" dstnodeid="25" dstpinname="texture2dStaticDepth">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="36">
+   <BOUNDS type="Box" left="3435" top="1755" width="480" height="480">
+   </BOUNDS>
+   <BOUNDS type="Node" left="3435" top="1755" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Bang">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="reset">
+   </PIN>
+   <PIN pinname="X Input Value" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="36" srcpinname="Y Output Value" dstnodeid="33" dstpinname="reset">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="37">
+   <BOUNDS type="Box" left="4875" top="1890" width="480" height="480">
+   </BOUNDS>
+   <BOUNDS type="Node" left="4875" top="1890" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="1">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Toggle">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="integrate">
+   </PIN>
+   <PIN pinname="X Input Value" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="37" srcpinname="Y Output Value" dstnodeid="33" dstpinname="integrate">
+   </LINK>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="38">
+   <BOUNDS type="Box" left="4140" top="3960" width="1590" height="270">
+   </BOUNDS>
+   <BOUNDS type="Node" left="4140" top="3960" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="StaticPixel">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Technique">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="38" srcpinname="Output Enum" dstnodeid="35" dstpinname="Technique">
+   </LINK>
+   <NODE systemname="SimpleBlend (DX11.TextureFX)" filename="%VVVV%\packs\Dust\nodes\texture11\SimpleBlend.tfx" nodename="SimpleBlend (DX11.TextureFX)" componentmode="Hidden" id="39">
+   <BOUNDS type="Node" left="1275" top="6480" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Control" visible="1">
+   </PIN>
+   <PIN pinname="Texture In" visible="1">
+   </PIN>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="25" srcpinname="Texture Out" dstnodeid="39" dstpinname="Control">
+   </LINK>
+   <LINK srcnodeid="17" srcpinname="Texture" dstnodeid="39" dstpinname="Texture In">
+   </LINK>
+   <LINK srcnodeid="39" srcpinname="Texture Out" dstnodeid="12" dstpinname="Texture In">
+   </LINK>
+   </PATCH>

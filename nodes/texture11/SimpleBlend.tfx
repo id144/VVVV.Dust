@@ -1,0 +1,59 @@
+//@author: vux
+//@help: template for texture fx
+//@tags: texture
+//@credits: 
+
+Texture2D tex0 : PREVIOUS;
+Texture2D tex1 <string uiname="Control";>;
+SamplerState linearSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+SamplerState pointSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_POINT;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+struct psInput
+{
+	float4 p : SV_Position;
+	float2 uv : TEXCOORD0;
+};
+
+
+float4 PS(psInput input) : SV_Target
+{
+	float4 c0 = tex0.Sample(pointSampler,input.uv);
+	float4 c1 = tex1.Sample(pointSampler,input.uv);	
+	c0 = c0 * c1;
+	return c0;
+}
+
+float4 PS_R(psInput input) : SV_Target
+{
+	float4 c0 = tex0.Sample(pointSampler,input.uv);
+	float4 c1 = tex1.Sample(pointSampler,input.uv);	
+	c0 = c0 * c1.r;
+	return c0;
+}
+
+technique10 Process
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS()));
+	}
+}
+
+
+
+technique10 ProcessR
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS_R()));
+	}
+}

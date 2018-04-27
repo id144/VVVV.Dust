@@ -1,0 +1,45 @@
+//@author: vux
+//@help: template for texture fx
+//@tags: texture
+//@credits: 
+
+Texture2D texture2dWorld : PREVIOUS;
+Texture2D texture2dStaticDepth;
+SamplerState linearSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+struct psInput
+{
+	float4 p : SV_Position;
+	float2 uv : TEXCOORD0;
+};
+
+
+float4 PS(psInput input) : SV_Target
+{
+	float4 world = texture2dWorld.Sample(linearSampler,input.uv);
+	float4 depthStatic = texture2dStaticDepth.Sample(linearSampler,input.uv);
+	//float c = abs(world.z -depthStatic.z) ;
+	float c = 0;
+	if ((world.z+0.1)<depthStatic.r) 
+	{
+		c = 1*world.z;
+	}
+	
+	return c;
+}
+
+technique10 Process
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS()));
+	}
+}
+
+
+

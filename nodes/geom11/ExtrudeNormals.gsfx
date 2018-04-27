@@ -1,0 +1,75 @@
+Texture2D inputTexture <string uiname="Displacement Texture";>;
+SamplerState pointSampler <string uiname="Sampler State";>
+{
+    Filter = MIN_MAG_MIP_POINT;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+struct vertextStruct
+{
+	float3 pos : POSITION;
+	float3 normal : NORMAL;	
+	float2 uv : TEXCOORD0;
+};
+
+vertextStruct VS(vertextStruct input)
+{
+	vertextStruct o;
+
+	o.pos =  input.pos;
+	o.normal = input.normal;
+	o.uv = input.uv;
+    return o;
+}
+float4x4 tW: WORLD;        
+float4x4 tV: VIEW;         
+float4x4 tWV: WORLDVIEW;
+float4x4 tP: PROJECTION;
+
+float3 Center;
+float Radius;
+float Power;
+float Strength;
+
+float4 attractor3d (
+  float4 v, // vertex
+  float3 c, // center
+  float  p, // power
+  float  s, // strenght
+  float  r  // radius
+) 
+{
+  if(length(v.xyz-c)<r)
+  {
+    v.xyz += (v.xyz-c)*s*(pow((length(v.xyz-c)/r),p)*sign(length(v.xyz-c)/r)/(length(v.xyz-c)/r)-1);
+  }
+  return float4(v.xyz,1);
+}
+
+[maxvertexcount(3)]
+void GS(triangle vertextStruct input[3], inout TriangleStream<vertextStruct> gsout)
+{ 
+	vertextStruct o = (vertextStruct)0;
+	float extrusion =  inputTexture.SampleLevel(pointSampler,input[0].uv.xy,0).r;
+	for (int i; i < 3; i++) 
+	{
+		o.uv = input[i].uv;
+		o.normal = input[i].normal;
+    	o.pos = input[i].pos+input[i].normal*extrusion;
+		gsout.Append(o);
+	}          
+	gsout.RestartStrip();		
+	
+	
+}
+
+GeometryShader gsStreamOut = ConstructGSWithSO( CompileShader( gs_4_0, GS() ), "POSITION.xyz;NORMAL.xyz;TEXCOORD.xy",NULL,NULL,NULL,-1 );
+technique11 PassMesh
+{
+    pass PP2
+    {
+        SetVertexShader( CompileShader( vs_4_0, VS() ) );
+        SetGeometryShader( gsStreamOut );
+    }  
+}
+

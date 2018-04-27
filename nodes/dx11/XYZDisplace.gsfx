@@ -1,0 +1,94 @@
+float amt <string uiname="Explode Amount";>;
+Texture2D xyzTexture <string uiname="XYZ Texture";>;
+Texture2D inputTexture <string uiname="Texture";>;
+float4x4 tW  <string uiname="World transform";>;
+
+SamplerState pointSampler <string uiname="Point Sampler State";>
+{
+    Filter = MIN_MAG_MIP_POINT;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+struct VS_IN
+{
+	float4 pos : POSITION;
+	float3 normal : NORMAL;
+	float4 uv : TEXCOORD0;
+};
+
+struct VS_OUTPUT
+{
+	float4 pos : POSITION;
+	float3 norm : NORMAL;
+	float4 uv : TEXCOORD0;
+};
+
+VS_OUTPUT VS(VS_IN input)
+{
+	VS_OUTPUT o;
+	float4 col = xyzTexture.SampleLevel(pointSampler,input.uv.xy,0);
+	o.pos = float4(col.rgb,1);
+	o.norm = input.normal;
+	o.uv=input.uv;
+    return o;
+}
+float3 boundsMin;
+float3 boundsMax;
+[maxvertexcount(3)]
+void GS(triangle VS_OUTPUT input[3], inout TriangleStream <VS_OUTPUT> gsout)
+{ 
+	VS_OUTPUT elem = (VS_OUTPUT)0;
+	elem.pos.w = 1.0;
+	float4 p1 = input[0].pos;
+	float4 p2 = input[1].pos;
+	float4 p3 = input[2].pos;
+	/*if ((abs(p1.x) > 0.01) && (abs(p2.x) > 0.01) &&(abs(p3.x) > 0.01))
+	{
+
+		p1 = mul(p1,tW);
+		p2 = mul(p2,tW);
+		p3 = mul(p3,tW);
+
+		if ((boundsMin.x<p1.x)&&(boundsMax.x>p1.x)
+		  &&(boundsMin.y<p1.y)&&(boundsMax.y>p1.y) 
+		  &&(boundsMin.z<p1.z)&&(boundsMax.z>p1.z)) 	
+		{	*/		
+		
+			float3 faceEdgeA = p2.xyz - p1.xyz;
+		    float3 faceEdgeB = p1.xyz - p3.xyz;
+		    float3 norm = cross(faceEdgeB, faceEdgeA);
+			norm = normalize(norm);	
+		
+			elem.pos.xyz = input[0].pos.xyz+(norm*amt);
+			elem.norm = input[0].norm;
+			elem.uv = input[0].uv;
+			gsout.Append(elem);
+		
+			elem.pos.xyz = input[1].pos.xyz+(norm*amt);
+			elem.norm = input[1].norm;
+			elem.uv = input[1].uv;
+			gsout.Append(elem);
+			
+			elem.pos.xyz = input[2].pos.xyz+(norm*amt);
+			elem.norm = input[2].norm;
+			elem.uv = input[2].uv;
+			gsout.Append(elem);
+		
+			gsout.RestartStrip();		
+	//	}
+		
+	//}
+}
+
+GeometryShader gsStreamOut = ConstructGSWithSO(CompileShader(gs_4_0, GS()), "POSITION.xyzw; NORMAL.xyz; TEXCOORD.xyzw", NULL, NULL, NULL, -1);
+technique11 PassMesh
+{
+    pass PP2
+    {
+        SetVertexShader(CompileShader(vs_4_0, VS()));
+        SetGeometryShader(gsStreamOut);
+    }  
+}
+
+

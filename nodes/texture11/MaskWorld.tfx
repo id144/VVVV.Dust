@@ -1,0 +1,47 @@
+//@author: vux
+//@help: template for texture fx
+//@tags: texture
+//@credits: 
+
+Texture2D xyzTexture : PREVIOUS;
+float4x4 tW <string uiname="Color Transform";>;
+float3 boxMin  <float3 uimin=0.0; String uiname="Box min";> = { 1.0f,1.0f,1.0f };
+float3 boxMax  <float3 uimin=0.0; String uiname="Box max";> = { 1.0f,1.0f,1.0f }; 
+SamplerState pointSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_POINT;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+struct psInput
+{
+	float4 p : SV_Position;
+	float2 uv : TEXCOORD0;
+};
+
+
+float4 PS(psInput input) : SV_Target
+{
+	float4 col = {1,1,1,1};
+	float4 xyz = xyzTexture.Sample(pointSampler,input.uv.xy);
+	if ( (xyz.r < 0.01)  && (xyz.b < 0.01) && (xyz.g < 0.01)) col.rgb = 0; 
+	xyz = mul(float4(xyz.rgb,1),tW);
+
+	if ((xyz.r < boxMin.x)||(xyz.r > boxMax.x)) col.rgb = 0;
+		if ((xyz.g < boxMin.y)||(xyz.g > boxMax.y)) col.rgb = 0;
+		if ((xyz.b < boxMin.z)||(xyz.b > boxMax.z)) col.rgb = 0;
+
+    return col;	
+}
+
+technique10 Process
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS()));
+	}
+}
+
+
+

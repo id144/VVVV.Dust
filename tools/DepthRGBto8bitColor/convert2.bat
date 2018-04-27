@@ -1,0 +1,1 @@
+ffmpeg  -r 30 -start_number 1 -i C:\Users\dust\Desktop\record_for_webgl\%08sonja_L2.png  -codec:v libtheora -qscale:v 5 -codec:a libvorbis -qscale:a 5 E:\TARDIS3.mp4
