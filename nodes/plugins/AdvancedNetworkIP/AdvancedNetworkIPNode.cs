@@ -57,69 +57,77 @@ namespace VVVV.Nodes
         [Import()]
 		public ILogger FLogger;
 		#endregion fields & pins
-
+		private bool update;
+		public AdvancedNetworkIPNode()
+		{
+			update = true;
+		}
 		//called when data for any output pin is requested
 		public void Evaluate(int SpreadMax)
-        {
-            FOutputName.SliceCount = 0;
-            FOutputDescription.SliceCount = 0;
-            FOutputIP.SliceCount = 0;
-            FOutputMulticastIP.SliceCount = 0;
-            FOutputWireless.SliceCount = 0;
-            FOutputMulticast.SliceCount = 0;
-            FOutputSpeed.SliceCount = 0;
-            FOutputDHCPEnabled.SliceCount = 0;
-            FOutputGateway.SliceCount = 0;
-        //    FOutputSubnetMask.SliceCount = 0;
-
-            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
-			foreach (var adapter in interfaces)
-			{
-			    var ipProps = adapter.GetIPProperties();
-                
-			    foreach (var ip in ipProps.UnicastAddresses)
-			    {
-                    if ((adapter.OperationalStatus == OperationalStatus.Up)
-                    && (ip.Address.AddressFamily == AddressFamily.InterNetwork))
-                    {                        
-                        FOutputName.Add(adapter.Name.ToString());
-                        FOutputDescription.Add(adapter.Description.ToString());
-                        FOutputIP.Add(ip.Address.ToString());
-                        FOutputWireless.Add(adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211);
-                        FOutputMulticast.Add(adapter.SupportsMulticast);
-                        FOutputSpeed.Add((long)adapter.Speed);
-                        
-
-                        //generate or get multicast IPv4 address
-                        byte[] b_ipAddress = ip.Address.GetAddressBytes();
-                        if (b_ipAddress.Length == 4) b_ipAddress[3] = 255;
-
-                        IPAddress multicastIP = new IPAddress(b_ipAddress);
-
-                        foreach (var ipMulticast in ipProps.MulticastAddresses)
-                        {
-                            if (ipMulticast.Address.AddressFamily == AddressFamily.InterNetwork) multicastIP = ipMulticast.Address;
-                        }
-                        FOutputMulticastIP.Add(multicastIP.ToString());
-
-                        string x = IPAddress.Broadcast.ToString();
-                        
-                        //return first gateway
-                        IPAddress gatewayIP = new IPAddress(0);
-
-                        if (ipProps.GatewayAddresses.Count > 0)
-                        {
-                            gatewayIP = ipProps.GatewayAddresses[0].Address;
-                        };
-                        FOutputGateway.Add(gatewayIP.ToString()); 
-
-                        IPAddressCollection addresses = ipProps.DhcpServerAddresses;
-
-                        IPv4InterfaceProperties _ipv4_props = ipProps.GetIPv4Properties();
-                        FOutputDHCPEnabled.Add(_ipv4_props.IsDhcpEnabled);
-                    }
-			    }
-			}
+        {        	
+        	if (((FInput.SliceCount > 0) && FInput[0])||(update))        	
+        	{
+        		update = false;
+	            FOutputName.SliceCount = 0;
+	            FOutputDescription.SliceCount = 0;
+	            FOutputIP.SliceCount = 0;
+	            FOutputMulticastIP.SliceCount = 0;
+	            FOutputWireless.SliceCount = 0;
+	            FOutputMulticast.SliceCount = 0;
+	            FOutputSpeed.SliceCount = 0;
+	            FOutputDHCPEnabled.SliceCount = 0;
+	            FOutputGateway.SliceCount = 0;
+	        //    FOutputSubnetMask.SliceCount = 0;
+	
+	            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+				foreach (var adapter in interfaces)
+				{
+				    var ipProps = adapter.GetIPProperties();
+	                
+				    foreach (var ip in ipProps.UnicastAddresses)
+				    {
+	                    if ((adapter.OperationalStatus == OperationalStatus.Up)
+	                    && (ip.Address.AddressFamily == AddressFamily.InterNetwork))
+	                    {                        
+	                        FOutputName.Add(adapter.Name.ToString());
+	                        FOutputDescription.Add(adapter.Description.ToString());
+	                        FOutputIP.Add(ip.Address.ToString());
+	                        FOutputWireless.Add(adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211);
+	                        FOutputMulticast.Add(adapter.SupportsMulticast);
+	                        FOutputSpeed.Add((long)adapter.Speed);
+	                        
+	
+	                        //generate or get multicast IPv4 address
+	                        byte[] b_ipAddress = ip.Address.GetAddressBytes();
+	                        if (b_ipAddress.Length == 4) b_ipAddress[3] = 255;
+	
+	                        IPAddress multicastIP = new IPAddress(b_ipAddress);
+	
+	                        foreach (var ipMulticast in ipProps.MulticastAddresses)
+	                        {
+	                            if (ipMulticast.Address.AddressFamily == AddressFamily.InterNetwork) multicastIP = ipMulticast.Address;
+	                        }
+	                        FOutputMulticastIP.Add(multicastIP.ToString());
+	
+	                        string x = IPAddress.Broadcast.ToString();
+	                        
+	                        //return first gateway
+	                        IPAddress gatewayIP = new IPAddress(0);
+	
+	                        if (ipProps.GatewayAddresses.Count > 0)
+	                        {
+	                            gatewayIP = ipProps.GatewayAddresses[0].Address;
+	                        };
+	                        FOutputGateway.Add(gatewayIP.ToString()); 
+	
+	                        IPAddressCollection addresses = ipProps.DhcpServerAddresses;
+	
+	                        IPv4InterfaceProperties _ipv4_props = ipProps.GetIPv4Properties();
+	                        FOutputDHCPEnabled.Add(_ipv4_props.IsDhcpEnabled);
+	                    }
+				    }
+				}        		
+        	}
 		}
 	}
 }

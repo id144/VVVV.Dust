@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta36.dtd" >
-   <PATCH nodename="C:\Users\Camouflage\Documents\GitHub\VVVV.Dust\nodes\plugins\AdvancedNetworkIP\IP (Network Advanced) help.v4p" scrollx="0" scrolly="-360">
+   <PATCH nodename="C:\vvvv_50beta36_x86\packs\VVVV.Dust\nodes\plugins\AdvancedNetworkIP\IP (Network Advanced) help.v4p" scrollx="0" scrolly="-360">
    <BOUNDS type="Window" left="6720" top="3240" width="21420" height="9795">
    </BOUNDS>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="3">
@@ -57,9 +57,11 @@
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="Update">
    </PIN>
+   <PIN pinname="X Input Value" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
    </NODE>
-   <LINK srcnodeid="12" srcpinname="Y Output Value" dstnodeid="15" dstpinname="Update">
-   </LINK>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="10">
    <BOUNDS type="Box" left="375" top="5715" width="3825" height="2010">
    </BOUNDS>
@@ -102,32 +104,6 @@
    </NODE>
    <PACK Name="addonpack" Version="36.0.0">
    </PACK>
-   <NODE systemname="IP (Network Advanced)" filename="AdvancedNetworkIP.csproj" nodename="IP (Network Advanced)" componentmode="Hidden" id="21">
-   <BOUNDS type="Node" left="360" top="9450" width="13935" height="270">
-   </BOUNDS>
-   <BOUNDS type="Box" left="360" top="9450" width="3000" height="3000">
-   </BOUNDS>
-   <PIN pinname="Multicast" visible="1">
-   </PIN>
-   <PIN pinname="Wireless" visible="1">
-   </PIN>
-   <PIN pinname="Multicast IP" visible="1">
-   </PIN>
-   <PIN pinname="DHCP Enabled" visible="1">
-   </PIN>
-   <PIN pinname="Name" visible="1">
-   </PIN>
-   <PIN pinname="Description" visible="1">
-   </PIN>
-   <PIN pinname="IP" visible="1">
-   </PIN>
-   <PIN pinname="Standard Gateway" visible="1">
-   </PIN>
-   <PIN pinname="Speed" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="8" srcpinname="Y Output Value" dstnodeid="21" dstpinname="Update">
-   </LINK>
    <PACK Name="dx11" Version="1.2">
    </PACK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="26">
@@ -229,7 +205,7 @@
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="Description">
    </PIN>
-   <PIN pinname="Input String" visible="1">
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="34">
@@ -247,7 +223,7 @@
    </PIN>
    <PIN pinname="Rows" slicecount="1" values="5">
    </PIN>
-   <PIN pinname="Y Input Value" visible="1" slicecount="1" values="0">
+   <PIN pinname="Y Input Value" visible="1">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="33">
@@ -304,8 +280,6 @@
    <PIN pinname="Input String" visible="1" slicecount="1" values="||">
    </PIN>
    </NODE>
-   <LINK srcnodeid="21" srcpinname="Name" dstnodeid="35" dstpinname="Input String">
-   </LINK>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="36">
    <BOUNDS type="Box" left="3000" top="12330" width="2370" height="2040">
    </BOUNDS>
@@ -325,19 +299,9 @@
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="Description">
    </PIN>
-   <PIN pinname="Input String" visible="1" slicecount="5" values=",,,,">
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
    </PIN>
    </NODE>
-   <LINK srcnodeid="21" srcpinname="Description" dstnodeid="36" dstpinname="Input String">
-   </LINK>
-   <LINK srcnodeid="21" srcpinname="IP" dstnodeid="33" dstpinname="Input String">
-   </LINK>
-   <LINK srcnodeid="21" srcpinname="DHCP Enabled" dstnodeid="34" dstpinname="Y Input Value">
-   </LINK>
-   <LINK srcnodeid="21" srcpinname="Standard Gateway" dstnodeid="31" dstpinname="Input String">
-   </LINK>
-   <LINK srcnodeid="21" srcpinname="Multicast IP" dstnodeid="32" dstpinname="Input String">
-   </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="37">
    <BOUNDS type="Box" left="12150" top="12330" width="570" height="1965">
    </BOUNDS>
@@ -353,11 +317,9 @@
    </PIN>
    <PIN pinname="Rows" slicecount="1" values="5">
    </PIN>
-   <PIN pinname="Y Input Value" visible="1" slicecount="1" values="0">
+   <PIN pinname="Y Input Value" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="21" srcpinname="Wireless" dstnodeid="37" dstpinname="Y Input Value">
-   </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="38">
    <BOUNDS type="Box" left="12765" top="12330" width="570" height="1965">
    </BOUNDS>
@@ -373,11 +335,9 @@
    </PIN>
    <PIN pinname="Rows" slicecount="1" values="5">
    </PIN>
-   <PIN pinname="Y Input Value" visible="1" slicecount="1" values="0">
+   <PIN pinname="Y Input Value" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="21" srcpinname="Multicast" dstnodeid="38" dstpinname="Y Input Value">
-   </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="39">
    <BOUNDS type="Box" left="13380" top="12330" width="1230" height="1950">
    </BOUNDS>
@@ -392,6 +352,50 @@
    <PIN pinname="Rows" slicecount="1" values="5">
    </PIN>
    </NODE>
-   <LINK srcnodeid="21" srcpinname="Speed" dstnodeid="39" dstpinname="Y Input Value">
+   <NODE systemname="OnOpen (VVVV)" nodename="OnOpen (VVVV)" componentmode="Hidden" id="40">
+   <BOUNDS type="Node" left="390" top="3735" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Simulate" visible="1">
+   </PIN>
+   <PIN pinname="Bang" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="12" srcpinname="Y Output Value" dstnodeid="40" dstpinname="Simulate">
+   </LINK>
+   <LINK srcnodeid="40" srcpinname="Bang" dstnodeid="15" dstpinname="Update">
+   </LINK>
+   <NODE systemname="Renderer (TTY)" nodename="Renderer (TTY)" componentmode="InAWindow" id="41">
+   <BOUNDS type="Node" left="2745" top="8430" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2745" top="8430" width="2400" height="1800">
+   </BOUNDS>
+   <BOUNDS type="Window" left="12375" top="8610" width="6240" height="5085">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="IP (Network Advanced)" filename="AdvancedNetworkIP.csproj" nodename="IP (Network Advanced)" componentmode="Hidden" id="42">
+   <BOUNDS type="Node" left="360" top="9450" width="13935" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="360" top="9450" width="3000" height="3000">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="8" srcpinname="Y Output Value" dstnodeid="42" dstpinname="Update">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="Name" dstnodeid="35" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="Description" dstnodeid="36" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="IP" dstnodeid="33" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="DHCP Enabled" dstnodeid="34" dstpinname="Y Input Value">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="Standard Gateway" dstnodeid="31" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="Multicast IP" dstnodeid="32" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="Wireless" dstnodeid="37" dstpinname="Y Input Value">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="Multicast" dstnodeid="38" dstpinname="Y Input Value">
+   </LINK>
+   <LINK srcnodeid="42" srcpinname="Speed" dstnodeid="39" dstpinname="Y Input Value">
    </LINK>
    </PATCH>

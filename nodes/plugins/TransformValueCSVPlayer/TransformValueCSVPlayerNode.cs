@@ -26,7 +26,7 @@ namespace VVVV.Nodes
 		[Input("Filename", IsSingle = true, StringType = StringType.Filename)] 
 		public IDiffSpread<string> FInputFileName;
 
-		[Input("Time", IsSingle = true)]
+		[Input("Time")]
 		public ISpread<double> FInputTime;
 
 		[Input("Reset", IsSingle = true, IsBang = true)]
@@ -84,7 +84,6 @@ namespace VVVV.Nodes
 
         private void ParseFile(string filename)
         {
-            keyFramesList2 = new List<keyFrames>();
             try
             {
                 using (StreamReader sr = new StreamReader(FInputFileName[0]))
@@ -149,37 +148,39 @@ namespace VVVV.Nodes
 
             }
         }
-		private void FindKeyframe(double Time) 
-		{
-			
-			FOutput.SliceCount = keyFramesList2.Count;
+        //private void FindKeyframe(double Time) 
+        private void FindKeyframe(ISpread<double> Time)
+        {
+            for (int offset = 0; offset < Time.SliceCount; offset++)
+            {
+                FOutput.SliceCount = keyFramesList2.Count * Time.SliceCount;
 
-			
-			FOutputTransform.SliceCount = keyFramesList2.Count;
+                FOutputTransform.SliceCount = keyFramesList2.Count * Time.SliceCount;
 
-			FOutputTrackName.SliceCount =  keyFramesList2.Count;
-			for (int j = 0; j < keyFramesList2.Count; j++) 			
-			{	
-				FOutputTrackName[j] = keyFramesList2[j].name;
-			}
-			for (int j = 0; j < keyFramesList2.Count; j++) 			
-			{
-				double  _delta = double.MaxValue;
-				double  _deltaOld = double.MaxValue;
-				
-				for (int i = 0; i < keyFramesList2[j].frame.Count; i++) 
-				{
-				 	_delta = Math.Abs(keyFramesList2[j].frame[i].timeCode - Time);
-					if (_delta > _deltaOld)
-					{				
-						FOutput[j] = keyFramesList2[j].frame[Math.Max((i-1),0)].timeCode;
-						FOutputTransform[j] = keyFramesList2[j].frame[Math.Max((i-1),0)].Transfrom;
-						break;
-					};
-					_deltaOld = _delta;					
-				}
-				
-			}
+                FOutputTrackName.SliceCount = keyFramesList2.Count * Time.SliceCount;
+                for (int j = 0; j < keyFramesList2.Count; j++)
+                {
+                    FOutputTrackName[j] = keyFramesList2[j].name;
+                }
+                for (int j = 0; j < keyFramesList2.Count; j++)
+                {
+                    double _delta = double.MaxValue;
+                    double _deltaOld = double.MaxValue;
+
+                    for (int i = 0; i < keyFramesList2[j].frame.Count; i++)
+                    {
+                        _delta = Math.Abs(keyFramesList2[j].frame[i].timeCode - Time[offset]);
+                        if (_delta > _deltaOld)
+                        {
+                            FOutput[j + offset] = keyFramesList2[j].frame[Math.Max((i - 1), 0)].timeCode;
+                            FOutputTransform[j + offset] = keyFramesList2[j].frame[Math.Max((i - 1), 0)].Transfrom;
+                            break;
+                        };
+                        _deltaOld = _delta;
+                    }
+
+                }
+            }
 		}
 		public void Evaluate(int SpreadMax)
 		{
@@ -191,17 +192,22 @@ namespace VVVV.Nodes
 			
 			if (_update) {				
 				_update = false;
-				//ArgDelegate sd = ParseFile;
-				//IAsyncResult asyncRes = sd.BeginInvoke(FInputFileName[0],null,null);
-
-                Task.Run(() => ParseFile(FInputFileName[0]));
+                //ArgDelegate sd = ParseFile;
+                //IAsyncResult asyncRes = sd.BeginInvoke(FInputFileName[0],null,null);
+                keyFramesList2 = new List<keyFrames>();
+                if (FInputFileName.SliceCount > 0)
+                {
+                    Task.Run(() => ParseFile(FInputFileName[0]));
+                }
             }			
 			if (keyFramesList.Count > 1) 
 			{
-				Task.Run(() => FindKeyframe(FInputTime[0]));
+                if (FInputTime.SliceCount > 0)
+                {
+                    Task.Run(() => FindKeyframe(FInputTime));
+                }
 				//ArgDelegateDouble sd = FindKeyframe;
 				//IAsyncResult asyncRes = sd.BeginInvoke(FInputTime[0],null,null);
-				
 			}
 		}
 	}
